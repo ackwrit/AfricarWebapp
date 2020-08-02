@@ -102,7 +102,9 @@ class admin extends State<administrationController>{
     return
       [
         infoProController(),
+
         professionnelSettingsController(),
+
         donneeController()
 
 

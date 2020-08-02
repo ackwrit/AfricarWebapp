@@ -3,6 +3,7 @@ import 'package:africarwebapp/model/compagnie.dart';
 import 'package:africarwebapp/model/trajet.dart';
 import 'package:africarwebapp/model/utilisateur.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth_web/firebase_auth_web.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 
@@ -100,6 +101,12 @@ class firebaseHelper{
 
 
 
+  Future<String> myId() async{
+    FirebaseUser user = await auth.currentUser();
+    return user.uid;
+
+
+  }
 
   addUser(String uid,Map map)
   {

@@ -1,5 +1,8 @@
 import 'package:africarwebapp/controller/administrationController.dart';
 import 'package:africarwebapp/controller/registerProController.dart';
+import 'package:africarwebapp/fonction/firebaseHelper.dart';
+import 'package:africarwebapp/model/utilisateur.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -55,6 +58,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  String mail,password,identifiant;
+  utilisateur personne;
 
 
   @override
@@ -79,6 +84,11 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
+              onChanged: (value){
+                setState(() {
+                  mail=value;
+                });
+              },
               
               decoration: InputDecoration(
                 filled: true,
@@ -93,6 +103,11 @@ class _MyHomePageState extends State<MyHomePage> {
             Padding(padding: EdgeInsets.all(5),),
             TextField(
               obscureText: true,
+              onChanged: (value){
+                setState(() {
+                  password=value;
+                });
+              },
 
               decoration: InputDecoration(
                   filled: true,
@@ -104,7 +119,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
               ),
             ),
-            FlatButton(
+           /* FlatButton(
                 onPressed: (){
                   Navigator.push(context, MaterialPageRoute(
                       builder: (BuildContext context){
@@ -112,15 +127,37 @@ class _MyHomePageState extends State<MyHomePage> {
                       }
                   ));
                 },
-                child: Text('Incription')
-            ),
+                child: Text('Inscription')
+            ),*/
             FlatButton(
                 onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(
+                  FirebaseAuth.instance.signInWithEmailAndPassword(email: mail, password: password).then((value){
+                    print("connected");
+
+                    firebaseHelper().myId().then((valeur) {
+                      setState(() {
+                        identifiant=valeur;
+                      });
+
+                      firebaseHelper().getUser(identifiant).then((user){
+                        setState(() {
+                          personne=user;
+                          print("passage personne");
+
+                        });
+                      });
+
+                    });
+
+                  }).catchError((onError){
+                    print(onError);
+
+                  });
+                  /*Navigator.push(context, MaterialPageRoute(
                       builder: (BuildContext context){
                         return administrationController();
                       }
-                  ));
+                  ));*/
                 },
                 child: Text('Connexion')
             ),
