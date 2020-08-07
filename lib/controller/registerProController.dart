@@ -1,5 +1,5 @@
 import 'package:africarwebapp/controller/administrationController.dart';
-import 'package:africarwebapp/fonction/firebaseHelper.dart';
+import 'package:africarwebapp/fonction/firestoreHelper.dart';
 import 'package:flutter/material.dart';
 
 class registerProController extends StatefulWidget{
@@ -154,13 +154,15 @@ class homeRegisterPro extends State<registerProController>{
             color: Colors.black,
             elevation: 5,
             onPressed: (){
-              firebaseHelper().handleCreateMailCompagnie(mail: mail,password: password,nif: matricule,adresse: adresse,nomDirigeant: nomDirigeant,prenomDirigeant: prenomDirigeant);
-              Navigator.push(context, MaterialPageRoute(
+              firestoreHelper().CreateCompagnie(NIF: matricule, mail: mail, pwd: password,adresse: adresse,nomDirigeant: nomDirigeant,prenomDirigeant: prenomDirigeant);
+              //firebaseHelper().handleCreateMailCompagnie(mail: mail,password: password,nif: matricule,adresse: adresse,nomDirigeant: nomDirigeant,prenomDirigeant: prenomDirigeant);
+            /*  Navigator.push(context, MaterialPageRoute(
                   builder: (BuildContext context){
                     return administrationController();
                   }
-              ));
+              ));*/
 
+            print('réussi');
               //enregister les informations dans la base de donnée compagnie
             },
             child: Text('Enregistrer',style: TextStyle(color: Colors.orange),),

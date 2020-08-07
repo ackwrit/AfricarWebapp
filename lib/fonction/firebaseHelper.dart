@@ -128,11 +128,7 @@ class firebaseHelper{
 
 
 
-  Future<utilisateur> getUser(String uid) async
-  {
-    DataSnapshot snapshot = await base_user.child(uid).once();
-    return utilisateur(snapshot);
-  }
+
 
 
   addTrajet(String uid,Map map)

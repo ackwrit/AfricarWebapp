@@ -1,4 +1,5 @@
 import 'package:africarwebapp/controller/administrationController.dart';
+import 'package:africarwebapp/controller/main_app_controller.dart';
 import 'package:africarwebapp/controller/registerProController.dart';
 import 'package:africarwebapp/fonction/firebaseHelper.dart';
 import 'package:africarwebapp/model/utilisateur.dart';
@@ -119,45 +120,24 @@ class _MyHomePageState extends State<MyHomePage> {
 
               ),
             ),
-           /* FlatButton(
-                onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(
-                      builder: (BuildContext context){
-                        return registerProController();
-                      }
-                  ));
-                },
-                child: Text('Inscription')
-            ),*/
+
             FlatButton(
                 onPressed: (){
                   FirebaseAuth.instance.signInWithEmailAndPassword(email: mail, password: password).then((value){
-                    print("connected");
+                    identifiant=value.user.uid;
 
-                    firebaseHelper().myId().then((valeur) {
-                      setState(() {
-                        identifiant=valeur;
-                      });
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (BuildContext context){
+                        return MainAppController(identifiant);
+                      }
+                  ));
 
-                      firebaseHelper().getUser(identifiant).then((user){
-                        setState(() {
-                          personne=user;
-                          print("passage personne");
-
-                        });
-                      });
-
-                    });
 
                   }).catchError((onError){
                     print(onError);
 
                   });
-                  /*Navigator.push(context, MaterialPageRoute(
-                      builder: (BuildContext context){
-                        return administrationController();
-                      }
-                  ));*/
+
                 },
                 child: Text('Connexion')
             ),

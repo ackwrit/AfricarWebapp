@@ -1,8 +1,8 @@
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 class utilisateur{
-  String id;
+  String uid;
   String nom;
   String prenom;
   String compagnie;
@@ -11,10 +11,11 @@ class utilisateur{
   String type_utilisateur;
 
 
-  utilisateur(DataSnapshot snapshot)
+  utilisateur(DocumentSnapshot snapshot)
   {
-    id=snapshot.key;
-    Map map = snapshot.value;
+    uid=snapshot.documentID;
+    //id=snapshot.key;
+    Map <String,dynamic>map = snapshot.data;
     nom = map['nom'];
     prenom = map['prenom'];
     compagnie =map['compagnie'];
@@ -30,7 +31,7 @@ class utilisateur{
     return map ={
       map['nom']:nom,
       map['prenom']:prenom,
-      map['id']:id,
+      map['uid']:uid,
       map['compagnie']:compagnie,
       map['telephone']:telephone,
       map['image']:image,

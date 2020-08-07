@@ -25,16 +25,7 @@ class homeInfoPro extends State<infoProController>{
 
 
   Widget bodyPage(){
-    return FirebaseAnimatedList(
-        query: firebaseHelper().base_user,
-        itemBuilder: (BuildContext context,DataSnapshot snapshot,Animation<double>animation,int index)
-        {
-          utilisateur user =utilisateur(snapshot);
-          return ListTile(
-            title: Text(user.id),
-          );
-        }
-    );
+    return Container();
   }
 
 }
