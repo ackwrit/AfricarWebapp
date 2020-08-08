@@ -1,4 +1,5 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 class compagnie{
@@ -12,9 +13,9 @@ class compagnie{
 
 
 
-  compagnie(DataSnapshot snapshot){
-    id = snapshot.key;
-    Map map = snapshot.value;
+  compagnie(DocumentSnapshot snapshot){
+    id = snapshot.documentID;
+    Map map = snapshot.data;
     matricule = map['matricule'];
     adresse = map['adresse'];
     mail = map['mail'];

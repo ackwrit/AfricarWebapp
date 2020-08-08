@@ -52,7 +52,7 @@ class _dashBoardState extends State<dashBoardCollaborateur> {
 
   List <Widget> controllers() {
     return [
-      listingTrajet(),
+      listingTrajet(widget.gare),
       createBillet(),
 
 

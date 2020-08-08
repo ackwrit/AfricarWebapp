@@ -118,10 +118,7 @@ class firebaseHelper{
     base_compagnie.child(uid).set(map);
   }
 
-  Future<compagnie> getCompagnie(String uid) async{
-    DataSnapshot snapshot = await base_compagnie.child(uid).once();
-    return compagnie(snapshot);
-  }
+
 
 
 
@@ -136,10 +133,7 @@ class firebaseHelper{
     base_trajet.child(uid).set(map);
   }
 
-  Future<trajet> getTrajet(String uid) async{
-    DataSnapshot snapshot = await base_trajet.child(uid).once();
-    return trajet(snapshot);
-  }
+
 
 
 }

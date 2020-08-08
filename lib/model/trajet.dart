@@ -1,4 +1,5 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 class trajet{
@@ -7,18 +8,18 @@ class trajet{
   String destination;
   String heureDepart;
   String heureDestination;
-  String prix;
+  int prix;
   String idCompagnie;
 
 
-  trajet(DataSnapshot snapshot)
+  trajet(DocumentSnapshot snapshot)
   {
-    id= snapshot.key;
-    Map map = snapshot.value;
+    id= snapshot.documentID;
+    Map map = snapshot.data;
     depart=map['depart'];
     destination=map['destination'];
-    heureDepart=map['heureDepart'];
-    heureDestination=map['heureDestination'];
+    //heureDepart=map['heureDepart'];
+    //heureDestination=map['heureDestination'];
     prix=map['prix'];
     idCompagnie=map['idCompagnie'];
   }
@@ -28,8 +29,8 @@ class trajet{
     return map={
       map['depart']:depart,
       map['destination']:destination,
-      map['heureDepart']:heureDepart,
-      map['heureDestination']:heureDestination,
+      //map['heureDepart']:heureDepart,
+      //map['heureDestination']:heureDestination,
       map['prix']:prix,
       map['idCompagnie']:idCompagnie,
 

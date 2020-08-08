@@ -56,6 +56,7 @@ class firestoreHelper{
 static final data_instance = Firestore.instance;
   final fire_compagnie = data_instance.collection("compagnie");
   final fire_user =data_instance.collection("utilisateur");
+  final fire_trajet=data_instance.collection("trajets");
 
 
   addCompagnie(Map <String,dynamic>map,String uid)
