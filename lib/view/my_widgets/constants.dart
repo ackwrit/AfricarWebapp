@@ -15,6 +15,14 @@ Color background = Colors.orangeAccent;
 Color backgroundbar =Colors.black;
 
 
+
+//horaire
+DateTime momentDepartNational;
+DateTime momentArriveeNational;
+DateTime momentDepartInternational;
+DateTime momentArriveeInternational;
+
+
 //Gare
 
 List <String> gares =[

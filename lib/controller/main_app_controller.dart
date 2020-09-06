@@ -2,11 +2,11 @@ import 'dart:async';
 import 'package:africarwebapp/controller/adminPage.dart';
 import 'package:africarwebapp/controller/collaborateurPage.dart';
 import 'package:africarwebapp/controller/directorPage.dart';
-import 'package:africarwebapp/controller/helpdeskPage.dart';
 import 'package:africarwebapp/controller/managerPage.dart';
 import 'package:africarwebapp/controller/partenairePage.dart';
 import 'package:africarwebapp/fonction/firestoreHelper.dart';
 import 'package:africarwebapp/model/utilisateur.dart';
+import 'package:africarwebapp/pages/helpdeskPage.dart';
 import 'package:flutter/material.dart';
 import 'package:africarwebapp/view/my_material.dart';
 

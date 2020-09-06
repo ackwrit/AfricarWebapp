@@ -35,7 +35,7 @@ class firestoreHelper{
       'matricule':NIF,
       'adresse':adresse,
       'mail':mail,
-      'nomeDirigeant':nomDirigeant,
+      'nomDirigeant':nomDirigeant,
       'prenomDirigeant':prenomDirigeant,
       'offre':'gratuit'
     };
@@ -57,6 +57,7 @@ static final data_instance = Firestore.instance;
   final fire_compagnie = data_instance.collection("compagnie");
   final fire_user =data_instance.collection("utilisateur");
   final fire_trajet=data_instance.collection("trajets");
+  final fire_billet=data_instance.collection("billets");
 
 
   addCompagnie(Map <String,dynamic>map,String uid)
