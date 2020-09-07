@@ -39,6 +39,7 @@ dependencies:
   animations: ^1.1.2
   firebase_messaging:
   animate_icons: ^0.0.4
+  http: ^0.12.2
 
 
 

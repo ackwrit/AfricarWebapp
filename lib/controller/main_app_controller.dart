@@ -9,6 +9,8 @@ import 'package:africarwebapp/model/utilisateur.dart';
 import 'package:africarwebapp/pages/helpdeskPage.dart';
 import 'package:flutter/material.dart';
 import 'package:africarwebapp/view/my_material.dart';
+import 'package:intl/date_symbol_data_local.dart';
+
 
 class MainAppController extends StatefulWidget{
   String identifiant;
@@ -28,6 +30,7 @@ class _MainState extends State<MainAppController>{
   void initState() {
     // TODO: implement initState
     super.initState();
+    initializeDateFormatting('fr_FR');
     //crétation de la souscription au stream
     streamListener = firestoreHelper().fire_user.document(widget.identifiant).snapshots().listen((event) {
       setState(() {
@@ -47,6 +50,7 @@ class _MainState extends State<MainAppController>{
   }
   @override
   Widget build(BuildContext context) {
+    initializeDateFormatting('fr_FR','');
     // TODO: implement build
     return (globalUser==null)?LoadingScaffold():Scaffold(
       appBar: AppBar(

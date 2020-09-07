@@ -6,6 +6,7 @@ import 'package:africarwebapp/model/utilisateur.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_file.dart';
 
 
 void main() {
@@ -63,11 +64,19 @@ class _MyHomePageState extends State<MyHomePage> {
   utilisateur personne;
 
 
+
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+  }
 
 
   @override
+
   Widget build(BuildContext context) {
+
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //zsh

@@ -1,9 +1,11 @@
+import 'package:africarwebapp/controller/validation_billet.dart';
 import 'package:africarwebapp/fonction/firestoreHelper.dart';
 import 'package:africarwebapp/model/billet.dart';
 import 'package:africarwebapp/view/my_widgets/loading_center.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class billetProvisoire extends StatefulWidget{
   @override
@@ -15,6 +17,9 @@ class billetProvisoire extends StatefulWidget{
 }
 
 class homeProvisoire extends State<billetProvisoire>{
+
+  DateFormat formatjour = DateFormat.yMMMMd('fr_FR');
+  DateFormat formatheure = DateFormat.Hm('fr_FR');
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -60,11 +65,21 @@ class homeProvisoire extends State<billetProvisoire>{
                     billet entreprise=billet(documents[index]);
 
                     if(entreprise.validate==false){
-                      return Card(
-                        child: ListTile(
-                          title: Text("${entreprise.lieuDepart} - ${entreprise.lieuArrivee} "),
-                          trailing: Text('Date : ${entreprise.depart}'),
+                      return InkWell(
+                        child: Card(
+                          elevation: 10,
+                          child: ListTile(
+                            title: Text("${entreprise.lieuDepart} - ${entreprise.lieuArrivee} "),
+                            trailing: Text('Date : ${formatjour.format(entreprise.depart)} - ${formatheure.format(entreprise.depart)}'),
+                          ),
                         ),
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (BuildContext context){
+                                return billetValidation(billets: entreprise,);
+                              }
+                          ));
+                        },
                       );
 
                     }
