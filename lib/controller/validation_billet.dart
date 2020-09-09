@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:africarwebapp/model/billet.dart';
 import 'package:africarwebapp/view/my_widgets/constants.dart';
 import 'package:flutter/material.dart';
@@ -85,32 +87,59 @@ class _homeValidation extends State<billetValidation> {
 
 
   Future _httpPost() async{
-    String url = urlafricarpayement;
-    var requestbody ={
-      "merchant_key": "bd77ff4d",
+    String urls = urlafricarpayement;
+    const url = 'https://example.com/whatsit/create';
+    const test ='www.google.com';
+    var credentials="R0luU1gybEJCR3h5Rnc3Z3MxakFFSVRreFBhTUFpaUc6a2ZWNnhlSGEwbVcxNWV6TA";
+    final strintobas64=utf8.fuse(base64);
+    final  encodedCredentials= strintobas64.encode(credentials);
+
+   Map <String,String> entete={
+     HttpHeaders.authorizationHeader :"Bearer $credentials",
+    HttpHeaders.contentTypeHeader:"application/json",
+     HttpHeaders.acceptHeader:"application/json",
+     HttpHeaders.hostHeader:"api.orange.com",
+     //"Postman-Token": "e18f3aac-9bd7-ddc5-a3a4-668e6089a0d5"
+    };
+    Map<String,dynamic>  payload = {
+    "merchant_key": "bd77ff4d",
     "currency": "OUV",
-    "order_id": "MY_ORDER_ID_08082105_ksdjsfjjsk",
-    "amount": 1200,
+    "order_id": "MY_ORDER_ID_08082105_0023457",
+    "amount": '1200',
     "return_url": "http://myvirtualshop.webnode.es",
     "cancel_url": "http://myvirtualshop.webnode.es/txncncld/",
     "notif_url": "http://www.merchant-example2.org/notif",
     "lang": "fr",
-    "reference": "Africar",
+    "reference":"MerchantWP00095",
 
-
-    "status":201,
-    "message":"OK",
-    "pay_token":"f5720dd906203c62033ffe64ed75614785878b0ab2231d9c582b2908fca0ab9a",
-    "payment_url":"https:\/\/webpayment-qualif.orange-money.com\/payment\/pay_token\/f5720dd906203c62033ffe64ed75614785878b0ab2231d9c582b2908fca0ab9a",
-    "notif_token":"dd497bda3b250e536186fc0663f32f40"
     };
-    http.Response response=await http.post(
-        url,
-        headers: {"Accept": "application/json","Content-Type": "application/json","Authorization": "Bearer R0luU1gybEJCR3h5Rnc3Z3MxakFFSVRreFBhTUFpaUc6a2ZWNnhlSGEwbVcxNWV6TA"},
-        body: json.encode(requestbody),
-        encoding: Encoding.getByName("utf-8"),
+
+    Map<String,dynamic> payToken ={
+      "pay_token":"R0luU1gybEJCR3h5Rnc3Z3MxakFFSVRreFBhTUFpaUc6a2ZWNnhlSGEwbVcxNWV6TA",
+      "payment_url":"https:\/\/webpayment-qualif.orange-money.com\/payment\/pay_token\/R0luU1gybEJCR3h5Rnc3Z3MxakFFSVRreFBhTUFpaUc6a2ZWNnhlSGEwbVcxNWV6TA",
+      "notif_token":"dd497bda3b250e536186fc0663f32f40"
+    };
+
+    http.Response response = await http.post(
+    "orange-money-webpay/dev/v1/webpayment HTTP/1.1",
+
+        headers: entete,
+        body: json.encode(payload)
     );
+
+
+
+
+
+
+
+
+
     print(response.statusCode);
+    print(response.request);
+    print(response.headers);
+    //print(response.body);
+
 
 
 
@@ -120,9 +149,28 @@ class _homeValidation extends State<billetValidation> {
 
 
   _launchURL() async {
-    String url = urlafricarpayement;
+    const url = 'https://api.orange.com/orange-money-webpay/dev/v1/webpayment';
+    var credentials="R0luU1gybEJCR3h5Rnc3Z3MxakFFSVRreFBhTUFpaUc6a2ZWNnhlSGEwbVcxNWV6TA";
+    String urls = urlafricarpayement;
+    Map <String,String> entete={HttpHeaders.authorizationHeader :"Bearer $credentials",
+      HttpHeaders.contentTypeHeader:"application/json",
+      HttpHeaders.acceptHeader:"application/json",
+      HttpHeaders.hostHeader:"api.orange.com",
+      "merchant_key": "bd77ff4d",
+      "currency": "OUV",
+      "order_id": "MY_ORDER_ID_08082105_0023457",
+      "amount": "1200",
+      "return_url": "http://myvirtualshop.webnode.es",
+      "cancel_url": "http://myvirtualshop.webnode.es/txncncld/",
+      "notif_url": "http://www.merchant-example2.org/notif",
+      "lang": "fr",
+      "reference":"MerchantWP00095",
+
+    };
     if (await canLaunch(url)) {
-      await launch(url);
+      await launch(url,
+          headers: entete,
+      );
     } else {
       throw 'Could not launch $url';
     }
