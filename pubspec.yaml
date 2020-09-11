@@ -40,6 +40,7 @@ dependencies:
   firebase_messaging:
   animate_icons: ^0.0.4
   http: ^0.12.2
+  flutter_html: ^1.0.2
 
 
 

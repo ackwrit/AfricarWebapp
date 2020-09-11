@@ -1,11 +1,14 @@
 import 'dart:io';
 
 import 'package:africarwebapp/model/billet.dart';
+import 'package:africarwebapp/model/my_token.dart';
+import 'package:africarwebapp/model/my_token_payement.dart';
 import 'package:africarwebapp/view/my_widgets/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 import'package:http/http.dart' as http;
+import 'package:http/browser_client.dart';
 import 'dart:convert';
 
 class billetValidation extends StatefulWidget{
@@ -87,58 +90,74 @@ class _homeValidation extends State<billetValidation> {
 
 
   Future _httpPost() async{
+    int prixTotal = widget.billets.prix;
+    
     String urls = urlafricarpayement;
-    const url = 'https://example.com/whatsit/create';
-    const test ='www.google.com';
     var credentials="R0luU1gybEJCR3h5Rnc3Z3MxakFFSVRreFBhTUFpaUc6a2ZWNnhlSGEwbVcxNWV6TA";
-    final strintobas64=utf8.fuse(base64);
-    final  encodedCredentials= strintobas64.encode(credentials);
+    // Récupération du token pour paiement
+    Map<String,String>headerToken={
+      HttpHeaders.authorizationHeader :'Basic $credentials',
 
-   Map <String,String> entete={
-     HttpHeaders.authorizationHeader :"Bearer $credentials",
-    HttpHeaders.contentTypeHeader:"application/json",
-     HttpHeaders.acceptHeader:"application/json",
-     HttpHeaders.hostHeader:"api.orange.com",
-     //"Postman-Token": "e18f3aac-9bd7-ddc5-a3a4-668e6089a0d5"
+      //HttpHeaders.contentTypeHeader:'application/json',
     };
-    Map<String,dynamic>  payload = {
-    "merchant_key": "bd77ff4d",
-    "currency": "OUV",
-    "order_id": "MY_ORDER_ID_08082105_0023457",
-    "amount": '1200',
-    "return_url": "http://myvirtualshop.webnode.es",
-    "cancel_url": "http://myvirtualshop.webnode.es/txncncld/",
-    "notif_url": "http://www.merchant-example2.org/notif",
-    "lang": "fr",
-    "reference":"MerchantWP00095",
+    Map<String,dynamic> bodyToken ={
+
+      "grant_type":"client_credentials",
+      "token_type": "Bearer",
+      "expires_in": "777600",
+      "access_token": ""
 
     };
+    //BrowserClient httpbroswer=new BrowserClient();
+    var response = await http.post('https://api.orange.com/oauth/v2/token',headers: headerToken,body: bodyToken);
+    Token body = Token.fromJson(jsonDecode(response.body));
 
-    Map<String,dynamic> payToken ={
-      "pay_token":"R0luU1gybEJCR3h5Rnc3Z3MxakFFSVRreFBhTUFpaUc6a2ZWNnhlSGEwbVcxNWV6TA",
-      "payment_url":"https:\/\/webpayment-qualif.orange-money.com\/payment\/pay_token\/R0luU1gybEJCR3h5Rnc3Z3MxakFFSVRreFBhTUFpaUc6a2ZWNnhlSGEwbVcxNWV6TA",
-      "notif_token":"dd497bda3b250e536186fc0663f32f40"
+
+    ///////////////////////////////////
+    //activation payment
+    Map <String,String> headerpayment={
+      HttpHeaders.authorizationHeader :"${body.token_type} ${body.access_token}",
+      HttpHeaders.acceptHeader:"application/json",
+      HttpHeaders.hostHeader:"api.orange.com",
+      HttpHeaders.contentTypeHeader:"application/json"
+      //"Postman-Token": "e18f3aac-9bd7-ddc5-a3a4-668e6089a0d5"
+    };
+    DateTime orderid = DateTime.now();
+
+
+    Map <String,dynamic> bodypayment ={
+      "Content-Type": "application/json",
+      "merchant_key": "bd77ff4d",
+      "currency": "OUV",
+      "order_id": "${orderid.day}${orderid.month}${orderid.year}${orderid.hour}${orderid.minute}${orderid.second}",
+      "amount": prixTotal.toString(),
+      "return_url": "http://myvirtualshop.webnode.es",
+      "cancel_url": "http://myvirtualshop.webnode.es/txncncld/",
+      "notif_url": "http://www.merchant-example2.org/notif",
+      "lang": "fr",
+      "reference":"Africar",
+
     };
 
-    http.Response response = await http.post(
-    "orange-money-webpay/dev/v1/webpayment HTTP/1.1",
+    http.Response paymentResponse = await http.post(
+        urlafricarpayement,
+        headers: headerpayment,
+        body: jsonEncode(bodypayment)
 
-        headers: entete,
-        body: json.encode(payload)
     );
+    TokenPayment paymenttoken = TokenPayment.fromJson(jsonDecode(paymentResponse.body));
+
+
+    //Lancement de la page paiement
+    if (await canLaunch(paymenttoken.payment_url)) {
+      await launch(paymenttoken.payment_url);
+    } else {
+      throw 'Could not launch ${paymenttoken.payment_url}';
+    }
 
 
 
 
-
-
-
-
-
-    print(response.statusCode);
-    print(response.request);
-    print(response.headers);
-    //print(response.body);
 
 
 

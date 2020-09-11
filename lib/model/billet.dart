@@ -20,6 +20,7 @@ class billet{
   String logoCompagnieRetour;
   String telephobne;
   bool validate;
+  int prix;
 
 
 
@@ -43,6 +44,7 @@ class billet{
     prenomPassager = map['prenomPassager'];
     telephobne =map ['telephone'];
     validate =map['validate'];
+    prix=map['prix'];
 
   }
 
@@ -64,6 +66,7 @@ class billet{
       map['logoCompagnieRetour']:logoCompagnieRetour,
       map['telephone']:telephobne,
       map['validate']:validate,
+      map['prix']:prix,
 
     };
   }
