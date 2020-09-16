@@ -10,6 +10,7 @@ import 'package:url_launcher/url_launcher.dart';
 import'package:http/http.dart' as http;
 import 'package:http/browser_client.dart';
 import 'dart:convert';
+import 'package:universal_io/io.dart';
 
 class billetValidation extends StatefulWidget{
   billet billets;
@@ -97,6 +98,13 @@ class _homeValidation extends State<billetValidation> {
     // Récupération du token pour paiement
     Map<String,String>headerToken={
       HttpHeaders.authorizationHeader :'Basic $credentials',
+      "Access-Control-Allow-Origin":"http://api.orange.com",
+      "Access-Control-Request-Method": "POST",
+      "Access-Control-Request-Headers":"Content-Type"
+
+
+
+
 
       //HttpHeaders.contentTypeHeader:'application/json',
     };

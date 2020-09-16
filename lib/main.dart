@@ -3,6 +3,7 @@ import 'package:africarwebapp/controller/main_app_controller.dart';
 import 'package:africarwebapp/controller/registerProController.dart';
 import 'package:africarwebapp/fonction/firebaseHelper.dart';
 import 'package:africarwebapp/model/utilisateur.dart';
+import 'package:africarwebapp/view/my_material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -87,7 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Image.asset("assets/logo.png",height: 225,),
+        title: imagebar,
         backgroundColor: Colors.black,
       ),
       backgroundColor: Colors.orange,

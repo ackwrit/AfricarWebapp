@@ -41,6 +41,8 @@ dependencies:
   animate_icons: ^0.0.4
   http: ^0.12.2
   flutter_html: ^1.0.2
+  universal_io: ^1.0.1
+
 
 
 
@@ -79,6 +81,7 @@ flutter:
   #   - images/a_dot_ham.jpeg
     - assets/logo.png
     - assets/indisponible.png
+    - assets/newlogo.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

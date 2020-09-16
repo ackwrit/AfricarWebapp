@@ -7,7 +7,7 @@ utilisateur globalUser;
 
 
 //Widget
-Widget imagebar = Image.asset("assets/logo.png",height: 225);
+Widget imagebar = Image.asset("assets/newlogo.jpg",height: 225);
 
 
 //couleur

@@ -10,6 +10,8 @@ class compagnie{
   String nomDirigeant;
   String prenomDirigeant;
   String offre;
+  String logo;
+  String nomCompagnie;
 
 
 
@@ -22,6 +24,8 @@ class compagnie{
     nomDirigeant = map['nomeDirigeant'];
     prenomDirigeant = map['prenomDirigeant'];
     offre = map['offre'];
+    logo =map['logo'];
+    nomCompagnie =map['nomCompagnie'];
 
   }
 
@@ -34,7 +38,9 @@ class compagnie{
       map['mail']:mail,
       map['nomeDirigeant']:nomDirigeant,
       map['prenomDirigeant']:prenomDirigeant,
-      map['offre']:offre
+      map['offre']:offre,
+      map['logo']:logo,
+      map['nomCompagnie']:nomCompagnie,
 
     };
   }

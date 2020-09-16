@@ -22,6 +22,7 @@ class firestoreHelper{
       {@required String NIF,
         @required String mail,
         @required String pwd,
+        @required String nomCompagnie,
         String nomDirigeant,
         String prenomDirigeant,
         String adresse,
@@ -33,6 +34,7 @@ class firestoreHelper{
     Map <String,dynamic>map={
       'id':uid,
       'matricule':NIF,
+      'nomCompagnie':nomCompagnie,
       'adresse':adresse,
       'mail':mail,
       'nomDirigeant':nomDirigeant,

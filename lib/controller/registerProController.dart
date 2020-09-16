@@ -12,13 +12,13 @@ class registerProController extends StatefulWidget{
 }
 
 class homeRegisterPro extends State<registerProController>{
-  String matricule,adresse,mail,nomDirigeant,prenomDirigeant,ofrre,password;
+  String matricule,adresse,mail,nomDirigeant,prenomDirigeant,ofrre,password,nomCompagnie;
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: Image.asset("assets/logo.png",height: 225,),
+        leading: null,
         backgroundColor: Colors.black,
       ),
       backgroundColor: Colors.orange,
@@ -30,148 +30,169 @@ class homeRegisterPro extends State<registerProController>{
 
 
   Widget bodyPage(){
-    return Container(
-      padding: EdgeInsets.all(10),
-      height: MediaQuery.of(context).size.height,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          //Numéro de NIF
-          TextField(
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20),
+    return SingleChildScrollView(
+      child: Container(
+        height: MediaQuery.of(context).size.height,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            //Numéro de NIF
+            TextField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                hintText: 'Numéro NIF',
+                fillColor: Colors.white,
+                filled: true,
               ),
-              hintText: 'Numéro NIF',
-              fillColor: Colors.white,
-              filled: true,
-            ),
-            onChanged: (value){
-              setState(() {
-                matricule=value;
-              });
-            },
+              onChanged: (value){
+                setState(() {
+                  matricule=value;
+                });
+              },
 
-          ),
-          Padding(padding: EdgeInsets.all(5),),
-          //Adresse locaux
-          TextField(
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20),
+            ),
+            Padding(padding: EdgeInsets.all(5),),
+            //nom de la compagnie
+            TextField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                hintText: 'Nom de la compagnie',
+                fillColor: Colors.white,
+                filled: true,
               ),
-              hintText: "Entrer l'adresse du siège social",
-              fillColor: Colors.white,
-              filled: true,
-            ),
-            onChanged: (value){
-              setState(() {
-                adresse=value;
-              });
-            },
+              onChanged: (value){
+                setState(() {
+                  nomCompagnie=value;
+                });
+              },
 
-          ),
-          Padding(padding: EdgeInsets.all(5),),
-          //adresse mail
-          TextField(
-            keyboardType: TextInputType.emailAddress,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20),
+            ),
+            Padding(padding: EdgeInsets.all(5),),
+            //Adresse locaux
+            TextField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                hintText: "Entrer l'adresse du siège social",
+                fillColor: Colors.white,
+                filled: true,
               ),
-              hintText: 'Mail',
-              fillColor: Colors.white,
-              filled: true,
-            ),
-            onChanged: (value){
-              setState(() {
-                mail=value;
-              });
-            },
+              onChanged: (value){
+                setState(() {
+                  adresse=value;
+                });
+              },
 
-          ),
-          Padding(padding: EdgeInsets.all(5),),
-          TextField(
-            obscureText: true,
-            keyboardType: TextInputType.emailAddress,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20),
+            ),
+            Padding(padding: EdgeInsets.all(5),),
+            //adresse mail
+            TextField(
+              keyboardType: TextInputType.emailAddress,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                hintText: 'Mail',
+                fillColor: Colors.white,
+                filled: true,
               ),
-              hintText: 'password',
-              fillColor: Colors.white,
-              filled: true,
-            ),
-            onChanged: (value){
-              setState(() {
-                password=value;
-              });
-            },
+              onChanged: (value){
+                setState(() {
+                  mail=value;
+                });
+              },
 
-          ),
-          Padding(padding: EdgeInsets.all(5),),
-          //nom dirigeant
-          TextField(
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20),
+            ),
+            Padding(padding: EdgeInsets.all(5),),
+            TextField(
+              obscureText: true,
+              keyboardType: TextInputType.emailAddress,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                hintText: 'password',
+                fillColor: Colors.white,
+                filled: true,
               ),
-              hintText: 'Nom du dirigeant',
-              fillColor: Colors.white,
-              filled: true,
-            ),
-            onChanged: (value){
-              setState(() {
-                nomDirigeant=value;
-              });
-            },
+              onChanged: (value){
+                setState(() {
+                  password=value;
+                });
+              },
 
-          ),
-          Padding(padding: EdgeInsets.all(5),),
-          //Prénom du dirigeant
-          TextField(
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20),
+            ),
+            Padding(padding: EdgeInsets.all(5),),
+            //nom dirigeant
+            TextField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                hintText: 'Nom du dirigeant',
+                fillColor: Colors.white,
+                filled: true,
               ),
-              hintText: 'Prénom du dirigeant',
-              fillColor: Colors.white,
-              filled: true,
+              onChanged: (value){
+                setState(() {
+                  nomDirigeant=value;
+                });
+              },
+
             ),
-            onChanged: (value){
-              setState(() {
-                prenomDirigeant=value;
-              });
-            },
+            Padding(padding: EdgeInsets.all(5),),
+            //Prénom du dirigeant
+            TextField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                hintText: 'Prénom du dirigeant',
+                fillColor: Colors.white,
+                filled: true,
+              ),
+              onChanged: (value){
+                setState(() {
+                  prenomDirigeant=value;
+                });
+              },
 
-          ),
+            ),
 
 
-          Padding(padding: EdgeInsets.all(10),),
+            Padding(padding: EdgeInsets.all(10),),
 
-          RaisedButton(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-            color: Colors.black,
-            elevation: 5,
-            onPressed: (){
-              firestoreHelper().CreateCompagnie(NIF: matricule, mail: mail, pwd: password,adresse: adresse,nomDirigeant: nomDirigeant,prenomDirigeant: prenomDirigeant);
-              //firebaseHelper().handleCreateMailCompagnie(mail: mail,password: password,nif: matricule,adresse: adresse,nomDirigeant: nomDirigeant,prenomDirigeant: prenomDirigeant);
-            /*  Navigator.push(context, MaterialPageRoute(
-                  builder: (BuildContext context){
-                    return administrationController();
-                  }
-              ));*/
+            RaisedButton(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+              color: Colors.black,
+              elevation: 5,
+              onPressed: (){
+                firestoreHelper().CreateCompagnie(NIF: matricule, mail: mail, pwd: password,adresse: adresse,nomDirigeant: nomDirigeant,prenomDirigeant: prenomDirigeant);
+                setState(() {
+                  mail=null;
+                  matricule=null;
+                  password=null;
+                  adresse=null;
+                  nomDirigeant=null;
+                  prenomDirigeant=null;
+                });
+                //enregister les informations dans la base de donnée compagnie
 
-            print('réussi');
-              //enregister les informations dans la base de donnée compagnie
-            },
-            child: Text('Enregistrer',style: TextStyle(color: Colors.orange),),
-          ),
+              },
+              child: Text('Enregistrer',style: TextStyle(color: Colors.orange),),
+            ),
 
-        ],
+          ],
 
-      ),
+        ),
+      )
     );
+
 
   }
 
