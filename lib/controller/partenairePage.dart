@@ -1,3 +1,4 @@
+import 'package:africarwebapp/controller/affichage_contact.dart';
 import 'package:africarwebapp/model/utilisateur.dart';
 import 'package:flutter/material.dart';
 import 'package:africarwebapp/view/my_material.dart';
@@ -17,10 +18,37 @@ class _partenaireState extends State<partenairePage>{
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Scaffold(
-      backgroundColor: background,
-      body: Text(globalUser.nom),
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: backgroundbar,
+          bottom: TabBar(
+
+              indicatorColor: background,
+              tabs: [
+
+
+
+                Tab(icon: Icon(Icons.account_circle),child: Text('Contacts'),),
+
+                Tab(icon: Icon(Icons.show_chart),child: Text('Bilan financier'),),
+              ]
+          ),
+        ),
+        backgroundColor: background,
+        body: TabBarView(children: controllers()
+        ),
+      ),
     );
+  }
+
+
+  List<Widget> controllers(){
+    return [
+      contact(),
+      Text('bilan financier')
+    ];
   }
 
 }

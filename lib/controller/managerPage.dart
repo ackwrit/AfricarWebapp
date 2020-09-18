@@ -18,8 +18,14 @@ class _managerState extends State<managerPage>{
     // TODO: implement build
     return Scaffold(
       backgroundColor: background,
-      body: Text(globalUser.nom),
+      body: bodyPage(),
+
     );
+  }
+
+
+  Widget bodyPage(){
+
   }
 
 }

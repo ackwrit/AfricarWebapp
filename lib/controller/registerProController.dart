@@ -17,10 +17,7 @@ class homeRegisterPro extends State<registerProController>{
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      appBar: AppBar(
-        leading: null,
-        backgroundColor: Colors.black,
-      ),
+
       backgroundColor: Colors.orange,
       body: bodyPage(),
 
@@ -31,12 +28,11 @@ class homeRegisterPro extends State<registerProController>{
 
   Widget bodyPage(){
     return SingleChildScrollView(
-      child: Container(
-        height: MediaQuery.of(context).size.height,
-        child: Column(
+      child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             //Numéro de NIF
+            SizedBox(height: 15),
             TextField(
               decoration: InputDecoration(
                 border: OutlineInputBorder(
@@ -190,7 +186,6 @@ class homeRegisterPro extends State<registerProController>{
           ],
 
         ),
-      )
     );
 
 

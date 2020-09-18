@@ -21,7 +21,7 @@ class compagnie{
     matricule = map['matricule'];
     adresse = map['adresse'];
     mail = map['mail'];
-    nomDirigeant = map['nomeDirigeant'];
+    nomDirigeant = map['nomDirigeant'];
     prenomDirigeant = map['prenomDirigeant'];
     offre = map['offre'];
     logo =map['logo'];
@@ -36,7 +36,7 @@ class compagnie{
       map['matricule']:matricule,
       map['adresse']:adresse,
       map['mail']:mail,
-      map['nomeDirigeant']:nomDirigeant,
+      map['nomDirigeant']:nomDirigeant,
       map['prenomDirigeant']:prenomDirigeant,
       map['offre']:offre,
       map['logo']:logo,

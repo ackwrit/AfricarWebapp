@@ -1,4 +1,6 @@
 import 'package:africarwebapp/controller/affichage_compagnie.dart';
+import 'package:africarwebapp/controller/ajouter_partenaire.dart';
+import 'package:africarwebapp/controller/contact_partenaire.dart';
 import 'package:africarwebapp/controller/registerProController.dart';
 import 'package:africarwebapp/view/my_widgets/constants.dart';
 import 'package:flutter/material.dart';
@@ -51,12 +53,12 @@ class commercialState extends State<commercialPage>{
   List<Widget> controllers(){
     return [
       listCompagnie(),
-      Text('contacts'),
+      contactPartner(),
       Text('Liste promotion'),
 
       Text('création des promotions'),
       registerProController(),
-      Text('ajouter partenaire')
+      addPartner(),
     ];
   }
 

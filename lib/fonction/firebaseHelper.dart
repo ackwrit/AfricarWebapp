@@ -2,6 +2,7 @@
 import 'package:africarwebapp/model/compagnie.dart';
 import 'package:africarwebapp/model/trajet.dart';
 import 'package:africarwebapp/model/utilisateur.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_auth_web/firebase_auth_web.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -98,6 +99,14 @@ class firebaseHelper{
   final base_compagnie=base.child('compagnie');
   final base_trajet=base.child('trajet');
 
+  static final data_instance = Firestore.instance;
+
+  final base_billet=base.child('billet');
+  final fire_compagnie = data_instance.collection("compagnie");
+  final fire_user =data_instance.collection("utilisateur");
+  final fire_trajet=data_instance.collection("trajets");
+  final fire_billet=data_instance.collection("billets");
+
 
 
 
@@ -110,7 +119,14 @@ class firebaseHelper{
 
   addUser(String uid,Map map)
   {
-    base_user.child(uid).set(map);
+    fire_user.document(uid).setData(map);
+  }
+
+
+  Future<utilisateur> getUser(String uid) async
+  {
+    DocumentSnapshot snapshot = await fire_user.document(uid).get();
+    return utilisateur(snapshot);
   }
 
   addCompagnie(String uid,Map map)

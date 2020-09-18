@@ -9,6 +9,9 @@ class utilisateur{
   String telephone;
   String image;
   String type_utilisateur;
+  String typeUtilisateur;
+  String mail;
+  String referent;
 
 
   utilisateur(DocumentSnapshot snapshot)
@@ -21,21 +24,28 @@ class utilisateur{
     compagnie =map['compagnie'];
     telephone =map['telephone'];
     image =map['image'];
+    uid=map['uid'];
     type_utilisateur =map['type_utilisateur'];
+    typeUtilisateur=map['typeUtilisateur'];
+    mail=map['mail'];
+    referent=map['referent'];
   }
 
 
   Map toMap()
   {
-    Map map;
+    Map <String,dynamic>map;
     return map ={
-      map['nom']:nom,
-      map['prenom']:prenom,
-      map['uid']:uid,
-      map['compagnie']:compagnie,
-      map['telephone']:telephone,
-      map['image']:image,
-      map['type_utilisateur']:type_utilisateur,
+      'mail':mail,
+      'nom':nom,
+      'prenom':prenom,
+      'uid':uid,
+      'compagnie':compagnie,
+      'telephone':telephone,
+      'image':image,
+      'type_utilisateur':type_utilisateur,
+      'referent':referent,
+      'typeUtilisateur':typeUtilisateur
     };
   }
 }

@@ -67,7 +67,7 @@ class _MainState extends State<MainAppController>{
 
   Widget bodyPage(){
     return Center(
-      child: showPage(globalUser.type_utilisateur)
+      child: showPage(globalUser.typeUtilisateur)
     );
   }
 
