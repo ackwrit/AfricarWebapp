@@ -1,3 +1,4 @@
+import 'package:africarwebapp/controller/contact_partenaire.dart';
 import 'package:africarwebapp/controller/create_billet.dart';
 import 'package:africarwebapp/controller/listing_trajet.dart';
 import 'package:africarwebapp/controller/registerProController.dart';
@@ -24,7 +25,7 @@ class _dashBoardState extends State<dashBoardCollaborateur> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return new DefaultTabController(
-        length: 1,
+        length: 2,
         child: Scaffold(
           appBar: AppBar(
             title: imagebar,
@@ -35,6 +36,7 @@ class _dashBoardState extends State<dashBoardCollaborateur> {
                 indicatorColor: Colors.orange,
 
                 tabs: [
+                  Tab(icon: new Icon(Icons.person), child: new Text("Contact"),),
                   Tab(icon: new Icon(Icons.format_list_bulleted), child: new Text("Trajet"),),
                  // Tab(icon: new Icon(Icons.bookmark),
                    // child: new Text("Création billet"),),
@@ -52,6 +54,7 @@ class _dashBoardState extends State<dashBoardCollaborateur> {
 
   List <Widget> controllers() {
     return [
+      contactPartner(),
       listingTrajet(widget.gare),
      // createBillet(),
 

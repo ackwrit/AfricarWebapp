@@ -113,7 +113,11 @@ class contactPartnerState extends State<contactPartner>{
                                 ),
                               ),
                               onTap: (){
-                                print('messagerie');
+                                Navigator.push(context,MaterialPageRoute(
+                                    builder: (BuildContext context){
+                                      return chatController(globalUser,user);
+                                    }
+                                ));
 
 
                               },

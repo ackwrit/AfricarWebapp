@@ -40,8 +40,8 @@ class chatControllerState extends State<chatController>{
           children: [
             //Zone de chat
             new Flexible(child: Container(
-              height: 600,
-              child: Messagecontroller(widget.moi.uid),
+              height: MediaQuery.of(context).size.height,
+              child: Messagecontroller(widget.moi,widget.partenaire),
             )),
             //Divider
             new Divider(height: 1.5,),

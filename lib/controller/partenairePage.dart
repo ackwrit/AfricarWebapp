@@ -1,4 +1,5 @@
 import 'package:africarwebapp/controller/affichage_contact.dart';
+import 'package:africarwebapp/controller/financePartener.dart';
 import 'package:africarwebapp/model/utilisateur.dart';
 import 'package:flutter/material.dart';
 import 'package:africarwebapp/view/my_material.dart';
@@ -47,7 +48,7 @@ class _partenaireState extends State<partenairePage>{
   List<Widget> controllers(){
     return [
       contact(),
-      Text('bilan financier')
+      financePartenaire(),
     ];
   }
 

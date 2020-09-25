@@ -20,7 +20,11 @@ class billet{
   String logoCompagnieRetour;
   String telephobne;
   bool validate;
-  int prix;
+  int prixAller;
+  int prixRetour;
+  String idCompagnieAller;
+  String idCompagnieRetour;
+  String idVoyageur;
 
 
 
@@ -44,7 +48,11 @@ class billet{
     prenomPassager = map['prenomPassager'];
     telephobne =map ['telephone'];
     validate =map['validate'];
-    prix=map['prix'];
+    prixAller=map['prixAller'];
+    prixRetour=map['prixRetour'];
+    idCompagnieAller=map['idCompagnieAller'];
+    idCompagnieRetour=map['idCompagnieRetour'];
+    idVoyageur=map['idVoyageur'];
 
   }
 
@@ -66,7 +74,11 @@ class billet{
       map['logoCompagnieRetour']:logoCompagnieRetour,
       map['telephone']:telephobne,
       map['validate']:validate,
-      map['prix']:prix,
+      map['prixAller']:prixAller,
+      map['prixRetour']:prixRetour,
+      map['idCompagnieAller']:idCompagnieAller,
+      map['idCompagnieRetour']:idCompagnieRetour,
+      map['idVoyageur']:idVoyageur
 
     };
   }
