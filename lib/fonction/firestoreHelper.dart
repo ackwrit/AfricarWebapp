@@ -148,6 +148,7 @@ static final data_instance = Firestore.instance;
   final fire_user =data_instance.collection("utilisateur");
   final fire_trajet=data_instance.collection("trajets");
   final fire_billet=data_instance.collection("billets");
+  final fire_chiffre=data_instance.collection("chiffres");
   final fire_message=data_instance.collection('messages');
   final fire_conversation=data_instance.collection('conversations');
 

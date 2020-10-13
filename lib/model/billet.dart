@@ -78,8 +78,42 @@ class billet{
       map['prixRetour']:prixRetour,
       map['idCompagnieAller']:idCompagnieAller,
       map['idCompagnieRetour']:idCompagnieRetour,
-      map['idVoyageur']:idVoyageur
+      map['idVoyageur']:idVoyageur,
+      map['idBillet']:id
 
     };
   }
+
+
+
+  billet.fromMap(Map<String,dynamic> map)
+      ://assert(map['idBillet']!=null),
+        //assert(map['idCompagnieRetour']!=null),
+        //assert(map['prixAller'!=null]),
+        //assert(map['prixRetour']!=null),
+        //assert(map['validate']!=null),
+        //assert(map['emission']!=null),
+        //emission = conversion().readTimestamp(map['emission']),
+        //validate =map['validate'],
+        id=map['idBillet'],
+        idCompagnieAller=map['idCompagnieAller'],
+        lieuDepart = map['lieuDepart'],
+        emission = conversion().readTimestamp(map['emission']),
+
+
+
+
+        //idCompagnieRetour=map['idCompagnieRetour'],
+        prixAller=map['prixAller'];
+        //prixRetour=map['prixRetour'];
+
+
+
+
+  @override
+  String toString() => "Record<$id:$prixAller>";
+
+
+
+
 }
