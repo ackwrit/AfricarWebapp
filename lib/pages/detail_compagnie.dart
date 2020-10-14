@@ -53,7 +53,7 @@ class settingsCompagnieState extends State<settingsCompagnie> {
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(
                   builder: (BuildContext context) {
-                    return commercialPage();
+                    return (globalUser.typeUtilisateur!='commercial')?directorPage():commercialPage();
                   }
               ));
             }),
@@ -75,18 +75,20 @@ class settingsCompagnieState extends State<settingsCompagnie> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Padding(padding: EdgeInsets.all(5),),
-             // (widget.factory.logo==null)?Image.asset("assets/indisponible.png",height: 250,):Image.network(widget.factory.logo),
+             /* Padding(padding: EdgeInsets.all(5),),
+             (widget.factory.logo==null)?Image.asset("assets/indisponible.png",height: 250,):Image.network(widget.factory.logo,width: 250,height: 250,
 
-              //RaisedButton(
-                //shape: RoundedRectangleBorder(
-                  //  borderRadius: BorderRadius.circular(20)),
-                //color: Colors.black,
-                //onPressed: imagePicker,
-                //child: Text(
-                  //"Modifier l'image", style: TextStyle(color: Colors.orange),),
-              //),
-             // Padding(padding: EdgeInsets.all(5),),
+             ),
+
+              RaisedButton(
+                shape: RoundedRectangleBorder(
+                   borderRadius: BorderRadius.circular(20)),
+                color: Colors.black,
+                onPressed: imagePicker,
+                child: Text(
+                  "Modifier l'image", style: TextStyle(color: Colors.orange),),
+              ),
+              Padding(padding: EdgeInsets.all(5),),*/
 
 
               (globalUser.typeUtilisateur!='commercial')?TextField(
@@ -138,7 +140,7 @@ class settingsCompagnieState extends State<settingsCompagnie> {
                     'id':widget.factory.id,
                     'matricule':widget.factory.matricule,
                     'nomCompagnie':widget.factory.nomCompagnie,
-                    'logo':widget.factory.logo,
+                    'logo':urlimage,
                     'adresse':widget.factory.adresse,
                     'mail':widget.factory.mail,
                     'nomDirigeant':nom,

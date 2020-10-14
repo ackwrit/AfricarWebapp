@@ -27,7 +27,7 @@ class listingTrajet extends StatelessWidget{
     // TODO: implement build
     return StreamBuilder<QuerySnapshot>
       (
-        stream:firestoreHelper().fire_trajet.snapshots(),
+        stream:firestoreHelper().fire_trajet.orderBy('heureDepart').snapshots(),
         builder: (BuildContext context, AsyncSnapshot <QuerySnapshot>snapshot){
           if (!snapshot.hasData){
             return LoadingCenter();
@@ -78,7 +78,6 @@ class listingTrajet extends StatelessWidget{
                                   (entreprise.logoCompagnie==null)?Image.asset("assets/indisponible.png",width: 100,):Image.network(entreprise.logoCompagnie,width: 100,),
                                   (entreprise.nomCompagnie==null)?Container():Text(entreprise.nomCompagnie),
                                   Text("${entreprise.depart} - ${entreprise.destination}"),
-                                  Text("Prix : ${formatchiffre.format(entreprise.prix)} CFA")
 
                                 ],
                               ),

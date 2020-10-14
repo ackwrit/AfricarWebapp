@@ -1,4 +1,5 @@
 import 'package:africarwebapp/controller/administrationController.dart';
+import 'package:africarwebapp/controller/directorPage.dart';
 import 'package:africarwebapp/fonction/firestoreHelper.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +13,8 @@ class registerProController extends StatefulWidget{
 }
 
 class homeRegisterPro extends State<registerProController>{
-  String matricule,adresse,mail,nomDirigeant,prenomDirigeant,ofrre,password,nomCompagnie;
+  String matricule,adresse,mail,nomDirigeant,prenomDirigeant,ofrre,nomCompagnie;
+  String password='Africars';
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -104,7 +106,7 @@ class homeRegisterPro extends State<registerProController>{
               },
 
             ),
-            Padding(padding: EdgeInsets.all(5),),
+            /*Padding(padding: EdgeInsets.all(5),),
             TextField(
               obscureText: true,
               keyboardType: TextInputType.emailAddress,
@@ -122,7 +124,7 @@ class homeRegisterPro extends State<registerProController>{
                 });
               },
 
-            ),
+            ),*/
             Padding(padding: EdgeInsets.all(5),),
             //nom dirigeant
             TextField(
@@ -168,15 +170,22 @@ class homeRegisterPro extends State<registerProController>{
               color: Colors.black,
               elevation: 5,
               onPressed: (){
-                firestoreHelper().CreateCompagnie(NIF: matricule, mail: mail, pwd: password,adresse: adresse,nomDirigeant: nomDirigeant,prenomDirigeant: prenomDirigeant);
+                firestoreHelper().CreateCompagnie(NIF: matricule, mail: mail, pwd: password,adresse: adresse,nomDirigeant: nomDirigeant,prenomDirigeant: prenomDirigeant,nomCompagnie: nomCompagnie);
                 setState(() {
-                  mail=null;
-                  matricule=null;
-                  password=null;
-                  adresse=null;
-                  nomDirigeant=null;
-                  prenomDirigeant=null;
+                  mail='';
+                  matricule='';
+                  password='';
+                  adresse='';
+                  nomDirigeant='';
+                  prenomDirigeant='';
+
                 });
+                Navigator.push(context, MaterialPageRoute(
+                    builder: (BuildContext context){
+                      return directorPage();
+                    }
+                ));
+
                 //enregister les informations dans la base de donnée compagnie
 
               },

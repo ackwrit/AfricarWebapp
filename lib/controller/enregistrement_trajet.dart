@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:africarwebapp/controller/directorPage.dart';
 import 'package:africarwebapp/fonction/firestoreHelper.dart';
 import 'package:africarwebapp/model/compagnie.dart';
 import 'package:africarwebapp/view/my_material.dart';
@@ -188,9 +189,15 @@ class registerTrajetState extends State<registerTrajet>{
       'prix':prix,
       'idCompagnie':widget.factory.id,
       'logoCompagnie':widget.factory.logo,
+      'nomCompagnie':widget.factory.nomCompagnie
 
     };
     firestoreHelper().addTrajet(map, uid);
+    Navigator.push(context, MaterialPageRoute(
+        builder: (BuildContext context){
+          return directorPage();
+        }
+    ));
 
 
 

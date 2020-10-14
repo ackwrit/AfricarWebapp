@@ -19,7 +19,7 @@ class recrutement extends StatefulWidget{
 class recrutementState extends State<recrutement> {
   String mail, prenom, nom;
   String uid = randomAlphaNumeric(20);
-  String password = randomAlphaNumeric(8);
+  String password = 'Africars';
 
   @override
   Widget build(BuildContext context) {

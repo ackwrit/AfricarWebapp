@@ -63,6 +63,7 @@ class firestoreHelper{
       'adresse':adresse,
       'mail':mail,
       'nomDirigeant':nomDirigeant,
+      'logo':null,
       'prenomDirigeant':prenomDirigeant,
       'offre':'gratuit'
     };

@@ -19,6 +19,7 @@ class detailTrajetController extends StatelessWidget{
     initializeDateFormatting('fr_FR');
     DateFormat formatjour = DateFormat.yMMMMd('fr_FR');
     DateFormat formatheure = DateFormat.Hm('fr_FR');
+    DateTime maintenant=DateTime.now();
 
     // TODO: implement build
     return StreamBuilder<QuerySnapshot>
@@ -54,13 +55,38 @@ class detailTrajetController extends StatelessWidget{
                 body: ListView.builder(
                     itemCount: documents.length,
                     itemBuilder: (BuildContext ctx,int index){
-                      billet entreprise = billet(documents[index]);
-                      return Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
+                      billet billets = billet(documents[index]);
+                      if((billets.depart.year==maintenant.year && billets.depart.month==maintenant.month && billets.depart.day==maintenant.day)||
+                          (billets.retour.year==maintenant.year && billets.retour.month==maintenant.month && billets.retour.day==maintenant.day)
+                      )
+                        {
+                          if((billets.idCompagnieAller == trajets.idCompagnie)||(billets.idCompagnieRetour==trajets.idCompagnie))
+                            {
+                              if(billets.validate==true)
+                                {
+                                  return Column(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
 
-                        ],
-                      );
+                                    ],
+                                  );
+                                }
+                              else
+                                {
+                                  return Container();
+                                }
+
+                            }
+                          else
+                            {
+                              return Container();
+                            }
+                        }
+                      else
+                        {
+                          return Container();
+                        }
+
 
 
 

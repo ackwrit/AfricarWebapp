@@ -4,6 +4,8 @@ import 'package:africarwebapp/controller/ajouter_partenaire.dart';
 import 'package:africarwebapp/controller/ajouter_trajet.dart';
 import 'package:africarwebapp/controller/contact_partenaire.dart';
 import 'package:africarwebapp/controller/dashboard_recrue.dart';
+import 'package:africarwebapp/controller/financeCompagnieController.dart';
+import 'package:africarwebapp/controller/finance_dashboard_factory.dart';
 import 'package:africarwebapp/controller/liste_trajet.dart';
 import 'package:africarwebapp/controller/registerProController.dart';
 import 'package:africarwebapp/view/my_widgets/constants.dart';
@@ -65,7 +67,7 @@ class directorState extends State<directorPage>{
 
       dashboardPersonnel(),
       registerProController(),
-      Text('bilan financier')
+      dashboardfinacial(),
     ];
   }
 

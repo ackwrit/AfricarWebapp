@@ -1,9 +1,9 @@
-
 import 'dart:math';
 
 import 'package:africarwebapp/fonction/firestoreHelper.dart';
 import 'package:africarwebapp/model/Indicator.dart';
 import 'package:africarwebapp/model/chiffres.dart';
+import 'package:africarwebapp/model/compagnie.dart';
 import 'package:africarwebapp/view/my_widgets/loading_center.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -13,22 +13,26 @@ import 'package:africarwebapp/view/my_widgets/constants.dart';
 import 'package:intl/intl.dart';
 
 
-class financePartenaire extends StatefulWidget{
+class financeCompagnieController extends StatefulWidget{
   @override
+  compagnie factory;
+  DateTime actuel;
+
+  financeCompagnieController({compagnie this.factory,DateTime this.actuel});
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return financepartenaireState();
+    return financeCompagnieState();
   }
 
 }
 
-class financepartenaireState extends State<financePartenaire> {
+class financeCompagnieState extends State<financeCompagnieController> {
 
   //Variable
-  DateTime now = DateTime.now();
   int denominateur = 100000;
   int touchedIndex;
   var formatchiffre = new NumberFormat('#,###','fr_FR');
+  DateTime now=DateTime.now();
 
 
 
@@ -60,107 +64,185 @@ class financepartenaireState extends State<financePartenaire> {
     // TODO: implement build
 
 
-    return _buildBody(context);
+    return Scaffold(
+      appBar: AppBar(
+        title: imagebar,
+        backgroundColor: backgroundbar,
+      ),
+      backgroundColor: background,
+      body: _buildBody(context),
+
+    );
+
   }
 
 
   Widget _buildBody(BuildContext context) {
-    String uidChiffre = '${now.year}${globalUser.uid}';
+    String uidChiffre = '${widget.actuel.year}${widget.factory.id}';
+
     return StreamBuilder <QuerySnapshot>(
-        stream: firestoreHelper().fire_chiffre.snapshots(),
-        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          if (!snapshot.hasData) {
-            return LoadingCenter();
-          }
-          else {
-            List<DocumentSnapshot> documents = snapshot.data.documents;
-            return ListView.builder(
-                itemCount: documents.length,
-                itemBuilder: (BuildContext ctx, int index) {
-                  chiffres chiffreAffaire = chiffres(documents[index]);
-                  if (chiffreAffaire.uidChiffre == uidChiffre) {
-                    return Column(
-                      children: [
-                        Container(
-                            height: MediaQuery
-                                .of(context)
-                                .size
-                                .height / 1.5,
-                            padding: EdgeInsets.all(20),
-                            child: Center(
-                                child: Stack(
-                                  children: <Widget>[
-                                    AspectRatio(
-                                      aspectRatio: 1.70,
-                                      child: Container(
-                                        decoration: const BoxDecoration(
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(18),
+            stream: firestoreHelper().fire_chiffre.snapshots(),
+            builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              if (!snapshot.hasData) {
+                return LoadingCenter();
+              }
+              else {
+                List<DocumentSnapshot> documents = snapshot.data.documents;
+                return ListView.builder(
+                    itemCount: documents.length,
+                    itemBuilder: (BuildContext ctx, int index) {
+                      chiffres chiffreAffaire = chiffres(documents[index]);
+
+                      if(chiffreAffaire.uidChiffre==uidChiffre)
+                      {
+                        return Column(
+                          children: [
+                          Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Container(
+                                height: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 1.2,
+                                width: MediaQuery.of(context).size.width/2,
+                                padding: EdgeInsets.all(20),
+                                child: Center(
+                                    child: Stack(
+                                      children: <Widget>[
+                                        AspectRatio(
+                                          aspectRatio: 1.70,
+                                          child: Container(
+                                            decoration: const BoxDecoration(
+                                                borderRadius: BorderRadius.all(
+                                                  Radius.circular(18),
+                                                ),
+                                                color: Color(0xff232d37)),
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 18.0,
+                                                  left: 12.0,
+                                                  top: 24,
+                                                  bottom: 12),
+                                              child: LineChart(
+                                                mainData(chiffreAffaire),
+                                              ),
                                             ),
-                                            color: Color(0xff232d37)),
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(
-                                              right: 18.0,
-                                              left: 12.0,
-                                              top: 24,
-                                              bottom: 12),
-                                          child: LineChart(
-                                            mainData(chiffreAffaire),
                                           ),
                                         ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 550,
-                                      height: 50,
-                                      child: Row(
-                                        children: [
-                                          FlatButton(
-                                            onPressed: () {
-                                              setState(() {
-                                                showAvg = !showAvg;
-                                              });
-                                            },
-                                            child: Text(
-                                              "Moy",
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  color: showAvg ? Colors.white: Colors
-                                                      .white.withOpacity(0.5)),
-                                            ),
+
+                                        SizedBox(
+                                          width: 750,
+                                          height: 50,
+                                          child: Row(
+                                            children: [
+                                              FlatButton(
+                                                onPressed: () {
+                                                  setState(() {
+                                                    showAvg = !showAvg;
+                                                  });
+                                                },
+                                                child: Text(
+                                                  "Moy",
+                                                  style: TextStyle(
+                                                      fontSize: 12,
+                                                      color: showAvg ? Colors.white: Colors
+                                                          .white.withOpacity(0.5)),
+                                                ),
+                                              ),
+
+                                              Text("CA: ",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize:18),),
+                                              Text(ValeurTotal(chiffreAffaire),style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize:18)),
+                                              Text(' CFA',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 18)),
+                                              SizedBox(
+                                                width: 50,
+                                              ),
+                                              SizedBox(
+                                                child: Text(widget.factory.nomCompagnie,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 18)),
+                                              ),
+
+
+                                            ],
                                           ),
-                                          Text("Chiffre d'affaire : ",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize:18),),
-                                          Text(ValeurTotal(chiffreAffaire),style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize:18)),
-                                          Text(' CFA',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 18))
 
-                                        ],
-                                      ),
+                                        ),
 
-                                    ),
 
-                                  ],
+                                      ],
+                                    )
                                 )
+                            ),
+                            Container(
+                              width: MediaQuery.of(context).size.width/3,
+                              height: MediaQuery.of(context).size.height/1.5,
+                              padding: EdgeInsets.all(20),
+                              child: graphfromage(chiffreAffaire),
                             )
+
+
+                          ],
                         ),
-                        Container(
-                          height: MediaQuery.of(context).size.height/1.5,
-                          padding: EdgeInsets.all(20),
-                          child: graphfromage(chiffreAffaire),
-                        )
-                        
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                (widget.actuel.year==2020)?Container():RaisedButton.icon(
+                                    onPressed: (){
+                                      Navigator.push(context, MaterialPageRoute(
+                                          builder: (BuildContext context){
+                                            int annee=widget.actuel.year;
+                                            DateTime moment=DateTime(annee-1);
+                                            return financeCompagnieController(factory: widget.factory,actuel:moment);
+                                          }
+                                      ));
+                                    },
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                                    color: backgroundbar,
+                                    icon: Icon(Icons.arrow_back_rounded),
+                                    label: Text('Précèdent')),
+                                (now.year==widget.actuel.year)?Container():RaisedButton.icon(
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                                    color: backgroundbar,
+                                    onPressed: (){
+                                      Navigator.push(context, MaterialPageRoute(
+                                          builder: (BuildContext context){
+                                        int annee=widget.actuel.year;
+                                        DateTime moment=DateTime(annee+1);
+                                        return financeCompagnieController(factory: widget.factory,actuel:moment);
+                                      }
+                                      ));
 
-                      ],
-                    );
-                  }
-                  else {
-                    return Container();
-                  }
-                }
-            );
-          }
-        }
+                                    },
+                                    icon: Icon(Icons.arrow_forward_rounded),
 
-    );
+
+                                    label: Text('Suivant'))
+                              ],
+                            ),
+
+                          ],
+
+                        );
+
+
+                      }
+                      else
+                      {
+                        return Container();
+                      }
+
+                    }
+
+
+                );
+              }
+            }
+
+        );
+
+
+
+
+
   }
 
   String ValeurTotal(chiffres business){
@@ -501,136 +583,136 @@ class financepartenaireState extends State<financePartenaire> {
     return AspectRatio(
       aspectRatio: 1.6,
       child: Card(
-        color: Colors.white,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Center(
-              child:Text("répartition du chiffre d'affaire",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),)
-            ),
+          color: Colors.white,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Center(
+                  child:Text("répartition du chiffre d'affaire",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),)
+              ),
 
 
 
-            Row(
-              children: <Widget>[
-                const SizedBox(
-                  height: 5,
+              Row(
+                children: <Widget>[
+                  const SizedBox(
+                    height: 5,
 
-                ),
-                Expanded(
-                  child: AspectRatio(
-                    aspectRatio: 1.6,
-                    child: PieChart(
-                      PieChartData(
-                          pieTouchData: PieTouchData(
-                              touchCallback: (pieTouchResponse) {
-                                setState(() {
-                                  if (pieTouchResponse
-                                      .touchInput is FlLongPressEnd ||
-                                      pieTouchResponse.touchInput is FlPanEnd) {
-                                    touchedIndex = -1;
-                                  } else {
-                                    touchedIndex =
-                                        pieTouchResponse.touchedSectionIndex;
-                                  }
-                                });
-                              }),
-                          borderData: FlBorderData(
-                            show: false,
-                          ),
-                          sectionsSpace: 0,
-                          centerSpaceRadius: 40,
-                          sections: showingSections(business,total)),
+                  ),
+                  Expanded(
+                    child: AspectRatio(
+                      aspectRatio: 1.6,
+                      child: PieChart(
+                        PieChartData(
+                            pieTouchData: PieTouchData(
+                                touchCallback: (pieTouchResponse) {
+                                  setState(() {
+                                    if (pieTouchResponse
+                                        .touchInput is FlLongPressEnd ||
+                                        pieTouchResponse.touchInput is FlPanEnd) {
+                                      touchedIndex = -1;
+                                    } else {
+                                      touchedIndex =
+                                          pieTouchResponse.touchedSectionIndex;
+                                    }
+                                  });
+                                }),
+                            borderData: FlBorderData(
+                              show: false,
+                            ),
+                            sectionsSpace: 0,
+                            centerSpaceRadius: 40,
+                            sections: showingSections(business,total)),
+                      ),
                     ),
                   ),
-                ),
-                Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const <Widget>[
-                    Indicator(
-                      color: Color(0xff0293ee),
-                      text: 'Janvier',
-                      isSquare: true,
-                    ),
-                    SizedBox(
-                      height: 4,
-                    ),
-                    Indicator(
-                      color: Color(0xfff8b250),
-                      text: 'Février',
-                      isSquare: true,
-                    ),
-                    SizedBox(
-                      height: 4,
-                    ),
-                    Indicator(
-                      color: Color(0xff845bef),
-                      text: 'Mars',
-                      isSquare: true,
-                    ),
-                    SizedBox(
-                      height: 4,
-                    ),
-                    Indicator(
-                      color: Color(0xff13d38e),
-                      text: 'Avril',
-                      isSquare: true,
-                    ),
-                    Indicator(
-                      color: Colors.amber,
-                      text: 'Mai',
-                      isSquare: true,
-                    ),
-                    Indicator(
-                      color: Colors.purpleAccent,
-                      text: 'Juin',
-                      isSquare: true,
-                    ),
-                    Indicator(
-                      color: Colors.limeAccent,
-                      text: 'Juillet',
-                      isSquare: true,
-                    ),
-                    Indicator(
-                      color: Colors.redAccent,
-                      text: 'Aout',
-                      isSquare: true,
-                    ),
-                    Indicator(
-                      color: Colors.black12,
-                      text: 'Septembre',
-                      isSquare: true,
-                    ),
-                    Indicator(
-                      color: Colors.teal,
-                      text: 'Octobre',
-                      isSquare: true,
-                    ),
-                    Indicator(
-                      color: Colors.yellowAccent,
-                      text: 'Novembre',
-                      isSquare: true,
-                    ),
-                    Indicator(
-                      color: Colors.blueAccent,
-                      text: 'Decembre',
-                      isSquare: true,
-                    ),
-                    SizedBox(
-                      height: 18,
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  width: 28,
-                ),
-              ],
-            ),
-          ],
+                  Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const <Widget>[
+                      Indicator(
+                        color: Color(0xff0293ee),
+                        text: 'Janvier',
+                        isSquare: true,
+                      ),
+                      SizedBox(
+                        height: 4,
+                      ),
+                      Indicator(
+                        color: Color(0xfff8b250),
+                        text: 'Février',
+                        isSquare: true,
+                      ),
+                      SizedBox(
+                        height: 4,
+                      ),
+                      Indicator(
+                        color: Color(0xff845bef),
+                        text: 'Mars',
+                        isSquare: true,
+                      ),
+                      SizedBox(
+                        height: 4,
+                      ),
+                      Indicator(
+                        color: Color(0xff13d38e),
+                        text: 'Avril',
+                        isSquare: true,
+                      ),
+                      Indicator(
+                        color: Colors.amber,
+                        text: 'Mai',
+                        isSquare: true,
+                      ),
+                      Indicator(
+                        color: Colors.purpleAccent,
+                        text: 'Juin',
+                        isSquare: true,
+                      ),
+                      Indicator(
+                        color: Colors.limeAccent,
+                        text: 'Juillet',
+                        isSquare: true,
+                      ),
+                      Indicator(
+                        color: Colors.redAccent,
+                        text: 'Aout',
+                        isSquare: true,
+                      ),
+                      Indicator(
+                        color: Colors.black12,
+                        text: 'Septembre',
+                        isSquare: true,
+                      ),
+                      Indicator(
+                        color: Colors.teal,
+                        text: 'Octobre',
+                        isSquare: true,
+                      ),
+                      Indicator(
+                        color: Colors.yellowAccent,
+                        text: 'Novembre',
+                        isSquare: true,
+                      ),
+                      Indicator(
+                        color: Colors.blueAccent,
+                        text: 'Decembre',
+                        isSquare: true,
+                      ),
+                      SizedBox(
+                        height: 18,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    width: 28,
+                  ),
+                ],
+              ),
+            ],
 
-        )
+          )
 
       ),
     );
