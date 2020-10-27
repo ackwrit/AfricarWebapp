@@ -4,6 +4,7 @@ import 'package:africarwebapp/fonction/firestoreHelper.dart';
 import 'package:africarwebapp/model/Indicator.dart';
 import 'package:africarwebapp/model/chiffres.dart';
 import 'package:africarwebapp/model/compagnie.dart';
+import 'package:africarwebapp/pages/dashbord_detail_finance.dart';
 import 'package:africarwebapp/view/my_widgets/loading_center.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -42,18 +43,18 @@ class financeCompagnieState extends State<financeCompagnieController> {
   ];
 
   bool showAvg = false;
-  int ancienjan = 0;
-  int ancienfev = 0;
-  int ancienmar = 0;
-  int ancienavril = 0;
-  int ancienmai = 0;
-  int ancienjuin = 0;
-  int ancienjuil = 0;
-  int ancienaout = 0;
-  int anciensep = 0;
-  int ancienoct = 0;
-  int anciennov = 0;
-  int anciendec = 0;
+  double ancienjan = 0;
+  double ancienfev = 0;
+  double ancienmar = 0;
+  double ancienavril = 0;
+  double ancienmai = 0;
+  double ancienjuin = 0;
+  double ancienjuil = 0;
+  double ancienaout = 0;
+  double anciensep = 0;
+  double ancienoct = 0;
+  double anciennov = 0;
+  double anciendec = 0;
 
 
   //
@@ -182,6 +183,19 @@ class financeCompagnieState extends State<financeCompagnieController> {
 
                           ],
                         ),
+                            RaisedButton(
+                              child: Text('Plus de détails',style: TextStyle(color: background),),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                              color: backgroundbar,
+                              onPressed: (){
+                                Navigator.push(context, MaterialPageRoute(
+                                    builder: (BuildContext context){
+                                      return dashBoardDetailFinance(factory: widget.factory,actuel: widget.actuel,);
+                                    }
+                                ));
+
+                              },
+                            ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -246,7 +260,7 @@ class financeCompagnieState extends State<financeCompagnieController> {
   }
 
   String ValeurTotal(chiffres business){
-    int total=business.janvier+business.fevrier+business.mars+business.avril+business.mai+business.juin+business.juillet+business.aout+business.septembre+business.octobre+business.novembre+business.decembre;
+    double total=business.janvier+business.fevrier+business.mars+business.avril+business.mai+business.juin+business.juillet+business.aout+business.septembre+business.octobre+business.novembre+business.decembre;
     return formatchiffre.format(total).toString();
 
   }
@@ -255,7 +269,7 @@ class financeCompagnieState extends State<financeCompagnieController> {
   LineChartData mainData(chiffres business) {
     int decimals=0;
     int fac=pow(10,decimals);
-    int total=business.janvier+business.fevrier+business.mars+business.avril+business.mai+business.juin+business.juillet+business.aout+business.septembre+business.octobre+business.novembre+business.decembre;
+    double total=business.janvier+business.fevrier+business.mars+business.avril+business.mai+business.juin+business.juillet+business.aout+business.septembre+business.octobre+business.novembre+business.decembre;
     double moyenne=total/12;
     moyenne=(moyenne*fac).round()/fac;
     return LineChartData(
@@ -579,7 +593,7 @@ class financeCompagnieState extends State<financeCompagnieController> {
 
 
   Widget graphfromage(chiffres business){
-    int total=business.janvier+business.fevrier+business.mars+business.avril+business.mai+business.juin+business.juillet+business.aout+business.septembre+business.octobre+business.novembre+business.decembre;
+    double total=business.janvier+business.fevrier+business.mars+business.avril+business.mai+business.juin+business.juillet+business.aout+business.septembre+business.octobre+business.novembre+business.decembre;
     return AspectRatio(
       aspectRatio: 1.6,
       child: Card(
@@ -719,7 +733,7 @@ class financeCompagnieState extends State<financeCompagnieController> {
   }
 
 
-  List<PieChartSectionData> showingSections(chiffres business,int total) {
+  List<PieChartSectionData> showingSections(chiffres business,double total) {
     int decimals=1;
     int fac=pow(10,decimals);
     double jan=(business.janvier)/total*100;

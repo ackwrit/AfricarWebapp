@@ -1,3 +1,4 @@
+
 import 'package:africarwebapp/controller/contact_partenaire.dart';
 import 'package:africarwebapp/controller/create_billet.dart';
 import 'package:africarwebapp/controller/listing_trajet.dart';
@@ -40,6 +41,7 @@ class _dashBoardState extends State<dashBoardCollaborateur> {
                   Tab(icon: new Icon(Icons.format_list_bulleted), child: new Text("Trajet"),),
                  // Tab(icon: new Icon(Icons.bookmark),
                    // child: new Text("Création billet"),),
+                  //Tab(icon: new Icon(Icons.qr_code_scanner_rounded), child: new Text("Scanner"),),
                 ]
             ),
 

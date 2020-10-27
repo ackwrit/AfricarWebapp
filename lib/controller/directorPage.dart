@@ -7,6 +7,7 @@ import 'package:africarwebapp/controller/dashboard_recrue.dart';
 import 'package:africarwebapp/controller/financeCompagnieController.dart';
 import 'package:africarwebapp/controller/finance_dashboard_factory.dart';
 import 'package:africarwebapp/controller/liste_trajet.dart';
+import 'package:africarwebapp/controller/myfinance.dart';
 import 'package:africarwebapp/controller/registerProController.dart';
 import 'package:africarwebapp/view/my_widgets/constants.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,7 @@ class directorState extends State<directorPage>{
   Widget build(BuildContext context) {
     // TODO: implement build
     return DefaultTabController(
-      length: 7,
+      length: 8,
       child: Scaffold(
         appBar: AppBar(
           leading: Icon(Icons.home),
@@ -44,6 +45,7 @@ class directorState extends State<directorPage>{
 
                 Tab(icon: Icon(Icons.person_add),child: Text('Nouvelle recrue'),),
                 Tab(icon: Icon(Icons.departure_board),child: Text('Ajout Compagnie'),),
+                Tab(icon: Icon(Icons.show_chart),child: Text('Finance Compagnie'),),
                 Tab(icon: Icon(Icons.show_chart),child: Text('Bilan financier'),),
               ]
           ),
@@ -68,6 +70,7 @@ class directorState extends State<directorPage>{
       dashboardPersonnel(),
       registerProController(),
       dashboardfinacial(),
+      myFinance(factory: "t5Xglz5jlXcHqvfbq6fWgHYc4mj2",actuel: DateTime.now(),),
     ];
   }
 

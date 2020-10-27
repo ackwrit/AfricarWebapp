@@ -8,10 +8,11 @@ class trajet{
   String destination;
   DateTime heureDepart;
   DateTime heureDestination;
-  int prix;
+  double prix;
   String idCompagnie;
   String logoCompagnie;
   String nomCompagnie;
+  double pourcentage;
 
 
 
@@ -27,6 +28,7 @@ class trajet{
     idCompagnie=map['idCompagnie'];
     logoCompagnie=map['logoCompagnie'];
     nomCompagnie=map['nomCompagnie'];
+    pourcentage =map['pourcentage'];
   }
 
   Map toMap(){
@@ -40,6 +42,7 @@ class trajet{
       map['idCompagnie']:idCompagnie,
       map['nomCompagnie']:nomCompagnie,
       map['logoCompagnie']:logoCompagnie,
+      map['pourcentage']:pourcentage,
 
     };
 

@@ -15,6 +15,7 @@ class registerProController extends StatefulWidget{
 class homeRegisterPro extends State<registerProController>{
   String matricule,adresse,mail,nomDirigeant,prenomDirigeant,ofrre,nomCompagnie;
   String password='Africars';
+  double pourcentage;
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -161,6 +162,26 @@ class homeRegisterPro extends State<registerProController>{
               },
 
             ),
+            Padding(padding: EdgeInsets.all(5),),
+            TextField(
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                hintText: 'Montant du pourcenatge',
+                fillColor: Colors.white,
+                filled: true,
+              ),
+              onChanged: (value){
+                setState(() {
+                  String valeurString=value;
+
+                  pourcentage =double.parse(valeurString);
+                });
+              },
+
+            ),
 
 
             Padding(padding: EdgeInsets.all(10),),
@@ -170,7 +191,7 @@ class homeRegisterPro extends State<registerProController>{
               color: Colors.black,
               elevation: 5,
               onPressed: (){
-                firestoreHelper().CreateCompagnie(NIF: matricule, mail: mail, pwd: password,adresse: adresse,nomDirigeant: nomDirigeant,prenomDirigeant: prenomDirigeant,nomCompagnie: nomCompagnie);
+                firestoreHelper().CreateCompagnie(NIF: matricule, mail: mail, pwd: password,adresse: adresse,nomDirigeant: nomDirigeant,prenomDirigeant: prenomDirigeant,nomCompagnie: nomCompagnie,pourcentage: pourcentage);
                 setState(() {
                   mail='';
                   matricule='';
@@ -178,6 +199,7 @@ class homeRegisterPro extends State<registerProController>{
                   adresse='';
                   nomDirigeant='';
                   prenomDirigeant='';
+                  pourcentage=0;
 
                 });
                 Navigator.push(context, MaterialPageRoute(

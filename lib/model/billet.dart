@@ -20,11 +20,14 @@ class billet{
   String logoCompagnieRetour;
   String telephobne;
   bool validate;
-  int prixAller;
-  int prixRetour;
+  double prixAller;
+  double prixRetour;
   String idCompagnieAller;
   String idCompagnieRetour;
   String idVoyageur;
+  double pourcentageAller;
+  double pourcentageRetour;
+  bool onboarding;
 
 
 
@@ -53,6 +56,9 @@ class billet{
     idCompagnieAller=map['idCompagnieAller'];
     idCompagnieRetour=map['idCompagnieRetour'];
     idVoyageur=map['idVoyageur'];
+    pourcentageAller=map['pourcentageAller'];
+    pourcentageRetour=map['pourcentageRetour'];
+    onboarding=map['onboarding'];
 
   }
 
@@ -79,7 +85,10 @@ class billet{
       map['idCompagnieAller']:idCompagnieAller,
       map['idCompagnieRetour']:idCompagnieRetour,
       map['idVoyageur']:idVoyageur,
-      map['idBillet']:id
+      map['idBillet']:id,
+      map['pourcentageAller']:pourcentageAller,
+      map['pourcentageRetour']:pourcentageRetour,
+      map['onboarding']:onboarding,
 
     };
   }

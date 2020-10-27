@@ -189,7 +189,8 @@ class registerTrajetState extends State<registerTrajet>{
       'prix':prix,
       'idCompagnie':widget.factory.id,
       'logoCompagnie':widget.factory.logo,
-      'nomCompagnie':widget.factory.nomCompagnie
+      'nomCompagnie':widget.factory.nomCompagnie,
+      'pourcentage':widget.factory.pourcentage,
 
     };
     firestoreHelper().addTrajet(map, uid);

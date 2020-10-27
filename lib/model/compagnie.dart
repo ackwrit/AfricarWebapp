@@ -12,6 +12,7 @@ class compagnie{
   String offre;
   String logo;
   String nomCompagnie;
+  double pourcentage;
 
 
 
@@ -26,6 +27,7 @@ class compagnie{
     offre = map['offre'];
     logo =map['logo'];
     nomCompagnie =map['nomCompagnie'];
+    pourcentage =map['pourcentage'];
 
   }
 
@@ -41,6 +43,7 @@ class compagnie{
       map['offre']:offre,
       map['logo']:logo,
       map['nomCompagnie']:nomCompagnie,
+      map['pourcentage']:pourcentage,
 
     };
   }

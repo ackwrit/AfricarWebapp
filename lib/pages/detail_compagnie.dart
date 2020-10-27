@@ -13,6 +13,7 @@ import 'package:africarwebapp/view/my_widgets/constants.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
+
 class settingsCompagnie extends StatefulWidget{
   compagnie factory;
   settingsCompagnie(@required this.factory);
@@ -75,7 +76,7 @@ class settingsCompagnieState extends State<settingsCompagnie> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-             /* Padding(padding: EdgeInsets.all(5),),
+             Padding(padding: EdgeInsets.all(5),),
              (widget.factory.logo==null)?Image.asset("assets/indisponible.png",height: 250,):Image.network(widget.factory.logo,width: 250,height: 250,
 
              ),
@@ -84,11 +85,11 @@ class settingsCompagnieState extends State<settingsCompagnie> {
                 shape: RoundedRectangleBorder(
                    borderRadius: BorderRadius.circular(20)),
                 color: Colors.black,
-                onPressed: imagePicker,
+                onPressed: null,//getImage,//imagePicker,
                 child: Text(
                   "Modifier l'image", style: TextStyle(color: Colors.orange),),
               ),
-              Padding(padding: EdgeInsets.all(5),),*/
+              Padding(padding: EdgeInsets.all(5),),
 
 
               (globalUser.typeUtilisateur!='commercial')?TextField(
@@ -242,4 +243,7 @@ class settingsCompagnieState extends State<settingsCompagnie> {
       globalUser.image = urlimage;
     });
   }
+
+
+
 }

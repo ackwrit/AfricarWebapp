@@ -91,7 +91,7 @@ class _homeValidation extends State<billetValidation> {
 
 
   Future _httpPost() async{
-    int prixTotal = widget.billets.prixAller + widget.billets.prixRetour;
+    double prixTotal = widget.billets.prixAller + widget.billets.prixRetour;
     
     String urls = urlafricarpayement;
     var credentials="R0luU1gybEJCR3h5Rnc3Z3MxakFFSVRreFBhTUFpaUc6a2ZWNnhlSGEwbVcxNWV6TA";

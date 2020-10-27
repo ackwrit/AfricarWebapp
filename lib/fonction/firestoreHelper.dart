@@ -51,6 +51,7 @@ class firestoreHelper{
         String nomDirigeant,
         String prenomDirigeant,
         String adresse,
+        double pourcentage,
       })
   async {
     AuthResult authResult = await authStore.createUserWithEmailAndPassword(email: mail, password: pwd);
@@ -65,7 +66,8 @@ class firestoreHelper{
       'nomDirigeant':nomDirigeant,
       'logo':null,
       'prenomDirigeant':prenomDirigeant,
-      'offre':'gratuit'
+      'offre':'gratuit',
+      'pourcentage':pourcentage,
     };
     addCompagnie(map, uid);
     return user;
@@ -152,6 +154,7 @@ static final data_instance = Firestore.instance;
   final fire_chiffre=data_instance.collection("chiffres");
   final fire_message=data_instance.collection('messages');
   final fire_conversation=data_instance.collection('conversations');
+  final fire_soldBillet=data_instance.collection('soldBillets');
 
 
   addCompagnie(Map <String,dynamic>map,String uid)

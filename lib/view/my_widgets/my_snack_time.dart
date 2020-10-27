@@ -43,8 +43,10 @@ class SnackbarStateTime extends State<MysnackbarTime>{
                   normalTextStyle: TextStyle(color: Colors.black,fontSize: 10),
                   onTimeChange: (time)
                   {
+
                     setState(() {
-                      globalTimeDepart=time;
+                      DateTime debut=DateTime(2020,1,1,time.hour,time.minute);
+                      globalTimeDepart=debut;
 
                     });
                   },

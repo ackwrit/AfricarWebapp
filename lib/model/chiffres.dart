@@ -3,20 +3,21 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class chiffres{
   String id;
-  int janvier;
-  int fevrier;
-  int mars;
-  int avril;
-  int mai;
-  int juin;
-  int juillet;
-  int aout;
-  int septembre;
-  int octobre;
-  int novembre;
-  int decembre;
+  double janvier;
+  double fevrier;
+  double mars;
+  double avril;
+  double mai;
+  double juin;
+  double juillet;
+  double aout;
+  double septembre;
+  double octobre;
+  double novembre;
+  double decembre;
   String uidChiffre;
   String nomCompagnie;
+  double total;
 
 
 
@@ -41,6 +42,7 @@ class chiffres{
     decembre=map['Decembre'];
     uidChiffre=map['uidChiffre'];
     nomCompagnie=map['nomCompagnie'];
+    total =map['total'];
 
 
 
