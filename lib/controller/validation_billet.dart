@@ -29,6 +29,7 @@ class _homeValidation extends State<billetValidation> {
   String urlsimulateur= 'https://simulator.webpayment-ow-sb.orange-money.com/simulator';
   String urlafricarpayement ='https://api.orange.com/orange-money-webpay/dev/v1/webpayment';
 
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -98,9 +99,9 @@ class _homeValidation extends State<billetValidation> {
     // Récupération du token pour paiement
     Map<String,String>headerToken={
       HttpHeaders.authorizationHeader :'Basic $credentials',
-      "Access-Control-Allow-Origin":"http://api.orange.com",
+      "Access-Control-Allow-Origin":"*",
       "Access-Control-Request-Method": "POST",
-      "Access-Control-Request-Headers":"Content-Type"
+      "Access-Control-Request-Headers":"Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token"
 
 
 

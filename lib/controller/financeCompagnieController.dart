@@ -4,7 +4,7 @@ import 'package:africarwebapp/fonction/firestoreHelper.dart';
 import 'package:africarwebapp/model/Indicator.dart';
 import 'package:africarwebapp/model/chiffres.dart';
 import 'package:africarwebapp/model/compagnie.dart';
-import 'package:africarwebapp/pages/dashbord_detail_finance.dart';
+//import 'package:africarwebapp/pages/dashbord_detail_finance.dart';
 import 'package:africarwebapp/view/my_widgets/loading_center.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -183,7 +183,7 @@ class financeCompagnieState extends State<financeCompagnieController> {
 
                           ],
                         ),
-                            RaisedButton(
+                           /* RaisedButton(
                               child: Text('Plus de détails',style: TextStyle(color: background),),
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                               color: backgroundbar,
@@ -195,7 +195,7 @@ class financeCompagnieState extends State<financeCompagnieController> {
                                 ));
 
                               },
-                            ),
+                            ),*/
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
