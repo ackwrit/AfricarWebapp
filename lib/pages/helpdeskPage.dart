@@ -1,4 +1,5 @@
 import 'package:africarwebapp/controller/billetProvisoire.dart';
+import 'package:africarwebapp/controller/creationBillet.dart';
 import 'package:africarwebapp/view/my_widgets/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -46,7 +47,7 @@ class homeHelpdesk extends State<helpdeskPage>{
   List<Widget> controllers(){
     return [
       billetProvisoire(),
-    Text('coucou création billet')
+      creationBillet()
     ];
   }
 

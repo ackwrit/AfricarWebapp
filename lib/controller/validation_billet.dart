@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 import'package:http/http.dart' as http;
-import 'package:http/browser_client.dart';
+//import 'package:http/browser_client.dart' as http;
 import 'dart:convert';
 import 'package:universal_io/io.dart';
 
@@ -101,7 +101,9 @@ class _homeValidation extends State<billetValidation> {
       HttpHeaders.authorizationHeader :'Basic $credentials',
       "Access-Control-Allow-Origin":"*",
       "Access-Control-Request-Method": "POST",
-      "Access-Control-Request-Headers":"Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token"
+      "Access-Control-Allow-Credentials": "true",
+      "Access-Control-Request-Headers":"Content-Type",
+
 
 
 
@@ -118,12 +120,13 @@ class _homeValidation extends State<billetValidation> {
 
     };
     //BrowserClient httpbroswer=new BrowserClient();
-    var response = await http.post('https://api.orange.com/oauth/v2/token',headers: headerToken,body: bodyToken);
+    var response = await http.post('https://api.orange.com/orange-money-webpay/dev/v1/webpayment',headers: headerToken,body: bodyToken);
     Token body = Token.fromJson(jsonDecode(response.body));
 
 
     ///////////////////////////////////
     //activation payment
+
     Map <String,String> headerpayment={
       HttpHeaders.authorizationHeader :"${body.token_type} ${body.access_token}",
       HttpHeaders.acceptHeader:"application/json",
