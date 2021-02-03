@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:africarwebapp/controller/listingCreationTrajet.dart';
 import 'package:africarwebapp/view/my_widgets/constants.dart';
+import 'package:africarwebapp/view/my_widgets/my_snack_date.dart';
 import 'package:africarwebapp/view/my_widgets/my_snack_time.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ class creationBillet extends StatefulWidget{
 class CreationState extends State<creationBillet>{
   bool trajetinternational=false;
   DateFormat formatheure = DateFormat.Hm('fr_FR');
+  DateFormat formatjour = DateFormat.yMMMMd('fr_FR');
   String destinationSelectionDepart='Choisir votre départ';
   String destinationSelectionArrivee='Choisir votre arrivée';
   GlobalKey <ScaffoldState> globalkeyTrajet = GlobalKey<ScaffoldState>();
@@ -103,13 +105,13 @@ class CreationState extends State<creationBillet>{
             selectedItem: destinationSelectionArrivee,
           ),
         ),
-        (globalTimeDepart==null)?Text('Heure de départ : ${formatheure.format(DateTime.now())}'):Text('Heure de départ : ${formatheure.format(globalTimeDepart)} '),
+        (globalDateDepart==null)?Text('Jour de départ : ${formatjour.format(DateTime.now())}'):Text('Jour de départ : ${formatjour.format(globalDateDepart)} '),
 
         RaisedButton.icon(icon: Icon(Icons.watch_later,color: background,),
           color: backgroundbar,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           onPressed: affichageSnack,
-          label:Text("Indiquer l'heure",style: TextStyle(color: background),),
+          label:Text("Indiquer le jour",style: TextStyle(color: background),),
 
         ),
 
@@ -160,7 +162,7 @@ class CreationState extends State<creationBillet>{
     //globalkeyTrajet.currentState.showBottomSheet((builder) => MysnackbarTime(timerheure: heureTimer,));
     Navigator.push(context, MaterialPageRoute(
         builder: (BuildContext context){
-          return MysnackbarTime();
+          return MysnackbarDate();
         }
     ));
     Timer.periodic(Duration(seconds:2), (timer){

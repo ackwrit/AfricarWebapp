@@ -1,3 +1,4 @@
+import 'package:africarwebapp/controller/achatbilletController.dart';
 import 'package:africarwebapp/controller/listing_trajet.dart';
 import 'package:africarwebapp/fonction/firestoreHelper.dart';
 import 'package:africarwebapp/model/billet.dart';
@@ -83,15 +84,16 @@ class listingTrajetState extends State<listingCreationTrajet>{
                             elevation: 10,
                             child: ListTile(
                               leading: Text('Compagnie : ${entreprise.nomCompagnie}'),
+                              subtitle: Text(' Heure : ${formatheure.format(entreprise.heureDepart)}'),
                               title: Text("${entreprise.depart} - ${entreprise.destination} "),
-                              trailing: Text('Heure : ${formatheure.format(entreprise.heureDepart)}'),
+                              trailing: Text('Prix : ${entreprise.prix} CFA'),
                             ),
                           ),
                           onTap: (){
                             Navigator.push(context, MaterialPageRoute(
                                 builder: (BuildContext context){
                                   //return billetValidation(billets: entreprise,);
-                                  return null;
+                                  return achatBillet(voyage: entreprise,);
                                 }
                             ));
                           },
@@ -107,6 +109,12 @@ class listingTrajetState extends State<listingCreationTrajet>{
           }
       },
     );
+  }
+
+
+  Achatbillet()
+  {
+
   }
 
 }
